@@ -1,0 +1,22 @@
+pipeline:
+  name: Test
+  identifier: Test
+  projectIdentifier: My_Project
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: https://github.com/shanmugamnaga/VirtualAgent
+        build: <+input>
+  stages:
+    - name: Build
+      execution:
+        agent: ubuntu-latest
+        steps:
+          - checkout
+          - script:
+              name: Build the application
+              command: make build
+          - artifact: build
